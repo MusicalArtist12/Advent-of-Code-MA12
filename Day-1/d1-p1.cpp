@@ -25,6 +25,8 @@ int main() {
 
         linenum++;
     } fin.close();
+
+
     
     int n = 3;
     int top[] = {-1, -1, -1};  
@@ -43,8 +45,8 @@ int main() {
     for(int i = 0; i < n; i++) {
         sum += elves[top[i]];
     }
-
-    std::cout << sum << std::endl;
+    std::cout << "top: elf(" << top[0] << ") = " << elves[top[0]] << std::endl;
+    std::cout << "sum of top 3: " << sum << std::endl;
     return 0;
 }
 

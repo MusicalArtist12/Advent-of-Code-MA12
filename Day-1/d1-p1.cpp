@@ -8,6 +8,7 @@
 #include <vector>
 
 int addElf(std::fstream& fin);
+bool includes(int arr[], int n, int check);
 
 int main() {
     std::fstream fin;
@@ -24,13 +25,27 @@ int main() {
 
         linenum++;
     } fin.close();
+    
+    int n = 3;
+    int top[] = {-1, -1, -1};  
 
-    int largest = 0; 
-    for(int i = 0; i < elves.size(); i++){
-        if(elves[largest] < elves[i]) largest = i;
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; (j < elves.size()); j++) {
+            if(
+                elves[j] > elves[top[i]] &&
+                !includes(top, n, j)
+            ) top[i] = j;
+        }
     }
 
-    std::cout << largest << ' ' << elves[largest] << std::endl;
+    int sum = 0;
+
+    for(int i = 0; i < n; i++) {
+        sum += elves[top[i]];
+    }
+
+    std::cout << sum << std::endl;
+    return 0;
 }
 
 int addElf(std::fstream& fin) {
@@ -47,4 +62,12 @@ int addElf(std::fstream& fin) {
     }
 
     return cal;
+}
+
+bool includes(int arr[], int n, int check) {
+    for(int i = 0; i < n; i++) {
+        if(check == arr[i]) return true;
+    }
+
+    return false;
 }
